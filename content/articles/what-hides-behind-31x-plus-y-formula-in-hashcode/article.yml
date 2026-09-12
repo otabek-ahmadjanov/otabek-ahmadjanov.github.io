@@ -1,0 +1,15 @@
+slug: what-hides-behind-31x-plus-y-formula-in-hashcode
+published: true
+publishedAt: 2026-07-15
+tags: [java, hashcode, collections]
+cover: images/cover.png
+title:
+  ru: |-
+    Что скрывается за формулой
+    (31 * x + y) в hashCode?
+  en: |-
+    What hides behind the
+    (31 * x + y) formula in hashCode()?
+summary:
+  ru: Почему в hashCode() выбрали именно 31, что сломается без множителя и как HashMap подстраховывает эту формулу на своей стороне.
+  en: Why Java picked 31 for hashCode(), what breaks without the multiplier, and how HashMap compensates for the formula on its own side.

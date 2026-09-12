@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<header th:replace="~{layout :: header('tags')}"></header>
+
+<main class="container">
+    <h1 class="page-title" th:text="#{tags.title}">Tags</h1>
+
+    <ul class="tag-cloud" th:if="${!tags.isEmpty()}">
+        <li th:each="t : ${tags}">
+            <a class="tag" th:href="${t.url}">
+                <span th:text="${t.name}">tag</span>
+                <span class="tag-count" th:text="${t.count}">3</span>
+            </a>
+        </li>
+    </ul>
+    <p class="empty-state" th:if="${tags.isEmpty()}" th:text="#{tags.empty}">No tags yet.</p>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script th:replace="~{layout :: scripts}"></script>
+</body>
+</html>

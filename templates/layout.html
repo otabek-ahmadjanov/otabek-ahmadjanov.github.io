@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Shared head. Pages provide model attrs: pageTitle, metaDescription, ogImage, ogType, lang, altUrl -->
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+    <title th:text="${pageTitle != null} ? ${pageTitle + ' — ' + siteName} : ${siteName}">syncoder</title>
+    <meta name="description" th:if="${metaDescription}" th:content="${metaDescription}">
+    <link rel="canonical" th:if="${currentPath}" th:href="${siteBaseUrl + currentPath}">
+    <link rel="alternate" hreflang="ru" th:if="${altUrl != null and lang == 'en'}" th:href="${siteBaseUrl + altUrl}">
+    <link rel="alternate" hreflang="en" th:if="${altUrl != null and lang == 'ru'}" th:href="${siteBaseUrl + altUrl}">
+    <meta property="og:site_name" th:content="${siteName}">
+    <meta property="og:title" th:content="${pageTitle} ?: ${siteName}">
+    <meta property="og:description" th:if="${metaDescription}" th:content="${metaDescription}">
+    <meta property="og:url" th:if="${currentPath}" th:content="${siteBaseUrl + currentPath}">
+    <meta property="og:type" th:content="${ogType} ?: 'website'">
+    <meta property="og:image" th:if="${ogImage}" th:content="${siteBaseUrl + ogImage}">
+    <link rel="alternate" type="application/rss+xml" th:title="${siteName}"
+          th:href="${lang == 'en'} ? '/en/feed.xml' : '/feed.xml'">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
+</head>
+
+<body>
+
+<!-- Site header. Params: active ('blog'|'about'), model attrs: lang, altUrl -->
+<header class="site-header container" th:fragment="header(active)">
+    <a class="logo" th:href="${lang == 'en'} ? '/en/' : '/'">syncoder</a>
+    <nav class="site-nav">
+        <a th:href="${lang == 'en'} ? '/en/' : '/'"
+           th:classappend="${active == 'blog'} ? 'active'" th:text="#{nav.blog}">blog</a>
+
+        <div class="nav-more" th:classappend="${active == 'about' or active == 'tags' or active == 'search'} ? 'active'">
+            <button type="button" class="nav-more-toggle" aria-haspopup="true" aria-expanded="false">
+                <span th:text="#{nav.more}">more</span>
+                <svg class="nav-more-caret" viewBox="0 0 24 24" width="12" height="12" fill="none"
+                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6"></path>
+                </svg>
+            </button>
+            <div class="nav-more-menu" role="menu">
+                <a th:href="${lang == 'en'} ? '/en/tags/' : '/tags/'" role="menuitem"
+                   th:classappend="${active == 'tags'} ? 'active'" th:text="#{nav.tags}">tags</a>
+                <a th:href="${lang == 'en'} ? '/en/search/' : '/search/'" role="menuitem"
+                   th:classappend="${active == 'search'} ? 'active'" th:text="#{nav.search}">search</a>
+                <a th:href="${lang == 'en'} ? '/en/about/' : '/about/'" role="menuitem"
+                   th:classappend="${active == 'about'} ? 'active'" th:text="#{nav.about}">about</a>
+            </div>
+        </div>
+
+        <div class="lang-switch" role="group" aria-label="Language">
+            <span th:if="${lang == 'ru'}" class="lang-opt active">ru</span>
+            <a th:if="${lang != 'ru' and altUrl != null}" class="lang-opt" th:href="${altUrl}">ru</a>
+            <span th:if="${lang != 'ru' and altUrl == null}" class="lang-opt disabled">ru</span>
+            <span th:if="${lang == 'en'}" class="lang-opt active">en</span>
+            <a th:if="${lang != 'en' and altUrl != null}" class="lang-opt" th:href="${altUrl}">en</a>
+            <span th:if="${lang != 'en' and altUrl == null}" class="lang-opt disabled">en</span>
+        </div>
+
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </nav>
+</header>
+
+<!-- Site footer -->
+<footer class="site-footer container" th:fragment="footer">
+    <span>© 2026 syncoder.uz</span>
+</footer>
+
+<script th:fragment="scripts" th:src="@{/js/theme.js}"></script>
+
+</body>
+</html>

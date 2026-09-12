@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<header th:replace="~{layout :: header('tags')}"></header>
+
+<main class="container">
+    <a class="back-link" th:href="${lang == 'en'} ? '/en/tags/' : '/tags/'">
+        <span class="back-arrow" aria-hidden="true">←</span>
+        <span th:text="#{tags.title}">Tags</span>
+    </a>
+    <h1 class="page-title" th:text="#{tag.title(${tag})}">Tag</h1>
+
+    <th:block th:replace="~{fragments :: postList(${articles})}"></th:block>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script th:replace="~{layout :: scripts}"></script>
+</body>
+</html>

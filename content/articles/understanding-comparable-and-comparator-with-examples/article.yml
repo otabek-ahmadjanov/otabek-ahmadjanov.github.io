@@ -1,0 +1,10 @@
+slug: understanding-comparable-and-comparator-with-examples
+published: yes
+publishedAt: 2026-07-20
+tags: [java, comparable, collections]
+title:
+  ru: Разбор Comparable и Comparator с примерами.
+  en: Understanding Comparable and Comparator - with examples
+summary:
+  ru: Контракты compareTo(), ловушка с переполнением, согласованность с equals и выбор между Comparable и Comparator - с примерами кода и вопросами с собеседований.
+  en: The compareTo() contracts, the overflow trap, consistency with equals, and choosing between Comparable and Comparator - with code examples and interview questions.

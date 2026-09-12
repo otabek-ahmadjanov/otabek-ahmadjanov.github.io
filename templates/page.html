@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<header th:replace="~{layout :: header(${page.slug})}"></header>
+
+<main class="container">
+    <article class="article-content">
+        <h1 th:text="${page.title}">Title</h1>
+        <div th:utext="${page.contentHtml}"></div>
+    </article>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script th:replace="~{layout :: scripts}"></script>
+</body>
+</html>

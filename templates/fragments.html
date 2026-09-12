@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<ul class="post-list" th:fragment="postList(articles)">
+    <li class="post-card" th:each="a : ${articles}">
+        <div class="meta">
+            <span th:text="${a.publishedDate}">Jul 5, 2026</span>
+            <span class="accent"> · </span>
+            <span th:text="#{article.minRead(${a.readingMinutes})}">7 min read</span>
+        </div>
+        <h2>
+            <a th:href="${a.url}" th:text="${a.title}">Article title</a>
+        </h2>
+        <p class="summary" th:if="${a.summary}" th:text="${a.summary}">Summary</p>
+        <ul class="tag-list" th:if="${!a.tags.isEmpty()}">
+            <li th:each="t : ${a.tags}">
+                <a class="tag" th:href="${t.url}" th:text="${t.name}">tag</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+<header th:replace="~{layout :: header('blog')}"></header>
+
+<main class="container">
+    <a class="back-link" th:href="${lang == 'en'} ? '/en' : '/'">
+        <span class="back-arrow" aria-hidden="true">←</span>
+        <span th:text="#{article.back}">all articles</span>
+    </a>
+    <article>
+        <header class="article-header">
+            <div class="meta-row">
+                <div class="meta">
+                    <span th:text="${article.publishedDate}">Jul 5, 2026</span>
+                    <span class="accent"> · </span>
+                    <span th:text="#{article.minRead(${article.readingMinutes})}">7 min read</span>
+                </div>
+                <button type="button" class="copy-link" data-copy-link
+                        th:attr="data-copied-label=#{article.linkCopied}">
+                    <svg class="copy-link-icon" viewBox="0 0 24 24" width="15" height="15" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    <span class="copy-link-label" th:text="#{article.copyLink}">copy link</span>
+                </button>
+            </div>
+            <h1 th:text="${article.title}">Article title</h1>
+            <ul class="tag-list" th:if="${!article.tags.isEmpty()}">
+                <li th:each="t : ${article.tags}">
+                    <a class="tag" th:href="${t.url}" th:text="${t.name}">tag</a>
+                </li>
+            </ul>
+            <img class="article-cover" th:if="${!#strings.isEmpty(article.coverImage)}" th:src="${article.coverImage}"
+                 th:alt="${article.title}">
+        </header>
+        <div class="article-content" th:utext="${article.contentHtml}"></div>
+    </article>
+
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script th:replace="~{layout :: scripts}"></script>
+<script th:src="@{/vendor/highlight/highlight.min.js}"></script>
+<script>hljs.highlightAll();</script>
+<script th:src="@{/js/copy-link.js}"></script>
+<script th:src="@{/js/reading-progress.js}"></script>
+</body>
+</html>

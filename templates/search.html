@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<header th:replace="~{layout :: header('search')}"></header>
+
+<main class="container">
+    <h1 class="page-title" th:text="#{search.title}">Search</h1>
+
+    <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input id="search-input" class="search-input" type="search" autocomplete="off" autofocus
+               th:attr="data-index=${'/search-index.' + lang + '.json'}"
+               th:placeholder="#{search.placeholder}">
+    </div>
+
+    <p class="search-status" id="search-status"
+       th:attr="data-hint=#{search.hint},data-empty=#{search.empty},data-results=#{search.results('{0}')}"
+       th:text="#{search.hint}">Start typing to search.</p>
+
+    <ul class="post-list" id="search-results"></ul>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script th:replace="~{layout :: scripts}"></script>
+<script th:src="@{/js/search.js}"></script>
+</body>
+</html>

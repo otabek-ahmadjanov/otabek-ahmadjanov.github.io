@@ -1,0 +1,13 @@
+slug: skeletal-implementation
+published: yes
+publishedAt: 2026-08-04
+tags: [java, design-patterns, effective-java]
+cover:
+  ru:
+  en:
+title:
+  ru: Скелетная реализация
+  en: Skeletal implementation
+summary:
+  ru: Как перестать копипастить методы интерфейса
+  en: How to stop copy-pasting interface methods

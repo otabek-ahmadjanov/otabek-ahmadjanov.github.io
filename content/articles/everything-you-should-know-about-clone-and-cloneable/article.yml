@@ -1,0 +1,17 @@
+slug: everything-you-should-know-about-clone-and-cloneable
+published: yes
+publishedAt: 2026-07-19
+tags: [java, cloning, effective-java]
+cover:
+  ru: images/cover-ru.png
+  en: images/cover-en.png
+title:
+  ru: |-
+    Все что нужно знать о
+    clone() и Cloneable
+  en: |-
+    Everything you need to know about 
+    clone() and Cloneable
+summary:
+  ru: Контракты, shallow copy, deep copy и copy constructor - разбор с примерами и вопросами с собеседований.
+  en: The contracts, shallow copy, deep copy, and copy constructors - explained with code examples and interview questions.
